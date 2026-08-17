@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wedding Invitation - Akhil & Sreya</title>
+  <meta name="description" content="You are warmly invited to celebrate with us. Please join us for our wedding celebration.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- 1. Top Photo Date Strip -->
+    <div class="photo-date-strip">
+      <div class="photo-column">
+        <img src="assets/images/banner_try.webp" alt="Wedding Banner 1" loading="eager">
+        <div class="date-overlay">14</div>
+      </div>
+      <div class="photo-column">
+        <img src="assets/images/banner2.webp" alt="Wedding Banner 2" loading="eager">
+        <div class="date-overlay">09</div>
+      </div>
+      <div class="photo-column">
+        <img src="assets/images/banner5.webp" alt="Wedding Banner 3" loading="eager">
+        <div class="date-overlay">27</div>
+      </div>
+    </div>
+
+    <!-- 2. Invitation Header -->
+    <header class="invitation-header">
+      <p class="gold-subtitle">You are warmly invited to<br>celebrate with us.</p>
+      <h1 class="couple-names">
+        <span class="name">Akhil</span>
+        <span class="ampersand">&amp;</span>
+        <span class="name">Sreya</span>
+      </h1>
+    </header>
+
+    <!-- 3. Bride & Groom Cards Section -->
+    <section class="profiles-section">
+      <p class="gold-subtitle-caps">BRIDE &amp; GROOM</p>
+      <h2 class="section-title">Happy Couple</h2>
+      
+      <!-- Groom Card -->
+      <div class="profile-card">
+        <div class="image-wrapper" onclick="openZoom('assets/images/groom.webp')">
+          <img src="assets/images/groom.webp" alt="AKHIL (Groom)" loading="lazy">
+        </div>
+        <h3 class="profile-name">AKHIL</h3>
+        <p class="profile-role">The Groom</p>
+        <p class="profile-parents">S/O Mrs. Renukadevi &amp; Mr. Anandhakrishnan</p>
+      </div>
+
+      <!-- Ring Divider -->
+      <div class="ring-divider">
+        <img src="assets/icons/ring.png" alt="Rings" class="ring-icon" loading="lazy">
+      </div>
+
+      <!-- Bride Card -->
+      <div class="profile-card">
+        <div class="image-wrapper" onclick="openZoom('assets/images/bride.webp')">
+          <img src="assets/images/bride.webp" alt="Sreya (Bride)" loading="lazy">
+        </div>
+        <h3 class="profile-name">Sreya</h3>
+        <p class="profile-role">The Bride</p>
+        <p class="profile-parents">D/O Mrs. Thara Krishnakumar &amp; Mr. Krishnakumar</p>
+      </div>
+    </section>
+
+    <!-- 4. When & Where Card -->
+    <section class="details-section">
+      <p class="gold-subtitle-caps">SAVE THE DATE</p>
+      <h2 class="section-title">When &amp; Where</h2>
+      
+      <div class="details-card">
+        <h3 class="card-heading">Wedding</h3>
+        
+        <div class="detail-line">
+          <span class="detail-icon">📅</span>
+          <div class="detail-content">
+            <h4 class="detail-title">Thursday, April 24, 2025</h4>
+            <p class="detail-subtitle">10:00 AM onwards</p>
+          </div>
+        </div>
+
+        <div class="detail-line">
+          <span class="detail-icon">📍</span>
+          <div class="detail-content">
+            <h4 class="detail-title">MD Convention Centre</h4>
+            <p class="detail-subtitle">Konathukunnu - Maniyamkavu Rd, Thekkumkara</p>
+          </div>
+        </div>
+
+        <div class="button-container">
+          <a class="map-button" href="https://www.google.com/maps/dir/?api=1&destination=MD+Convention+Centre,+Konathukunnu+-+Maniyamkavu+Rd,+Thekkumkara,+Kerala+680123&travelmode=driving" target="_blank" rel="noopener">
+            View on Map
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Countdown Section -->
+    <section class="countdown-section">
+      <h2 class="countdown-title">Countdown</h2>
+      <div class="countdown-row">
+        <div class="countdown-box">
+          <span class="countdown-val" id="days">00</span>
+          <span class="countdown-label">DAYS</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-val" id="hours">00</span>
+          <span class="countdown-label">HOURS</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-val" id="minutes">00</span>
+          <span class="countdown-label">MINUTES</span>
+        </div>
+        <div class="countdown-box">
+          <span class="countdown-val" id="seconds">00</span>
+          <span class="countdown-label">SECONDS</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Footer Thank You Card -->
+    <footer class="footer-section">
+      <div class="footer-image-container">
+        <img src="assets/images/footer1.webp" alt="Wedding Footer Background" class="footer-bg" loading="lazy">
+        <div class="thank-you-overlay">
+          <div class="thank-you-card">
+            <h2 class="thank-you-title">Thank You!</h2>
+            
+            <div class="heart-divider">
+              <span class="line"></span>
+              <span class="heart">♥</span>
+              <span class="line"></span>
+            </div>
+
+            <p class="thank-you-text">Your presence and blessings<br>mean the world to us.</p>
+            
+            <button class="share-button" onclick="shareInvitation()">
+              <span class="share-icon">📤</span> Share This Invitation
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Zoom Dialog Modal -->
+  <div id="zoomModal" class="modal" onclick="closeZoom()">
+    <span class="modal-close" onclick="closeZoom()">&times;</span>
+    <img class="modal-content" id="zoomedImg" alt="Zoomed image view" onclick="event.stopPropagation()">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
