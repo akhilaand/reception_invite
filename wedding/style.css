@@ -1,0 +1,814 @@
+/* Import typography (Alex Brush for elegant cursive, Cormorant for serifs, Poppins for UI) */
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@400;500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F7F3E9;
+  color: #2D4629;
+  font-family: 'Lora', serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Base Container constrained for mobile elegance */
+.app-container {
+  width: 100%;
+  max-width: 520px;
+  background-color: #F7F3E9;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 1. Hero Section with Parallax Feel */
+.hero-section {
+  position: relative;
+  height: 85vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%; /* Exceeds height slightly for scroll-parallax displacement */
+  z-index: 1;
+}
+
+.hero-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Shift down slightly (20% from top) to make sure the couple's faces are fully visible */
+  object-position: 50% 20%;
+  animation: heroKenBurns 18s ease-in-out infinite alternate;
+}
+
+@keyframes heroKenBurns {
+  0% {
+    transform: scale(1.02);
+    object-position: 50% 20%;
+  }
+  100% {
+    transform: scale(1.10);
+    object-position: 50% 25%;
+  }
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(45, 70, 41, 0.15), rgba(45, 70, 41, 0.45));
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.hero-card {
+  /* Liquid soft gradient background */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(247, 243, 233, 0.75), rgba(255, 255, 255, 0.85));
+  background-size: 200% 200%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  /* Liquid organic blob shape default */
+  border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%;
+  width: 100%;
+  padding: 45px 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 15px 35px rgba(45, 70, 41, 0.12);
+  transform: translateY(20px);
+  opacity: 0;
+  
+  /* Multiple animations: reveal on load, pulsating liquid blob shape, moving gradient background */
+  animation: heroCardReveal 2s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+             liquidBlob 12s ease-in-out infinite alternate,
+             liquidBg 15s ease infinite alternate;
+}
+
+@keyframes liquidBlob {
+  0% {
+    border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%;
+  }
+  33% {
+    border-radius: 54% 46% 38% 62% / 49% 51% 49% 51%;
+  }
+  66% {
+    border-radius: 42% 58% 54% 46% / 60% 40% 60% 40%;
+  }
+  100% {
+    border-radius: 60% 40% 60% 40% / 40% 60% 40% 60%;
+  }
+}
+
+@keyframes liquidBg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero-card.fade-in {
+  animation: heroCardReveal 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroCardReveal {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.hero-subtitle {
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: #B67B16;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.hero-couple-names {
+  font-family: 'Alex Brush', cursive;
+  font-size: 64px;
+  color: #2D4629;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.hero-divider {
+  width: 60px;
+  height: 1px;
+  background-color: #B67B16;
+  margin: 10px 0;
+}
+
+.hero-date {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  color: #2D4629;
+  margin-top: 8px;
+}
+
+/* Scroll indicator mouse animation */
+.scroll-indicator {
+  margin-top: 30px;
+}
+
+.scroll-indicator .mouse {
+  width: 20px;
+  height: 32px;
+  border: 1.5px solid #2D4629;
+  border-radius: 12px;
+  display: block;
+  position: relative;
+}
+
+.scroll-indicator .wheel {
+  width: 3px;
+  height: 6px;
+  background-color: #B67B16;
+  border-radius: 2px;
+  display: block;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollMouseWheel 1.6s infinite ease-in-out;
+}
+
+@keyframes scrollMouseWheel {
+  0% { top: 6px; opacity: 1; }
+  100% { top: 18px; opacity: 0; }
+}
+
+/* 2. Invitation Intro Section */
+.invite-intro {
+  padding: 60px 24px;
+  text-align: center;
+}
+
+.ornate-border {
+  border: 1px solid #B67B16;
+  border-radius: 8px;
+  padding: 36px 20px;
+  position: relative;
+}
+
+.ornate-border::before {
+  content: '❖';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #F7F3E9;
+  color: #B67B16;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.ornate-border::after {
+  content: '❖';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #F7F3E9;
+  color: #B67B16;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+.intro-gold-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  color: #B67B16;
+  margin-bottom: 16px;
+}
+
+.intro-text {
+  font-size: 16px;
+  color: #2D4629;
+  line-height: 1.8;
+  font-weight: 400;
+}
+
+.intro-text strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2D4629;
+}
+
+/* 3. Bride & Groom Section (Arch Frames) */
+.portraits-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 24px 60px;
+}
+
+.section-gold-subtitle {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  color: #B67B16;
+  text-align: center;
+}
+
+.section-main-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 600;
+  color: #2D4629;
+  margin-top: 4px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.portrait-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+/* Arch Shaped Frame using border-radius */
+.arch-frame {
+  width: 250px;
+  height: 350px;
+  border-radius: 125px 125px 0 0; /* semi-circle top, flat bottom */
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid #B67B16;
+  padding: 6px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.arch-frame:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
+
+.portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 119px 119px 0 0; /* matches inner frame curve */
+  display: block;
+}
+
+.portrait-name {
+  font-family: 'Alex Brush', cursive;
+  font-size: 40px;
+  color: #2D4629;
+  margin-top: 20px;
+  line-height: 1;
+}
+
+.portrait-role {
+  font-size: 16px;
+  font-weight: 500;
+  color: #B67B16;
+  margin-top: 6px;
+  margin-bottom: 4px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.portrait-parents {
+  font-size: 14px;
+  color: #B67B16;
+  line-height: 1.5;
+  padding: 0 12px;
+}
+
+.middle-divider {
+  margin: 32px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.rings-divider-icon {
+  width: 70px;
+  height: auto;
+  opacity: 0.9;
+}
+
+/* 4. Wedding Schedule Timeline */
+.timeline-section {
+  padding: 40px 24px 60px;
+  background-color: rgba(45, 70, 41, 0.03); /* subtle green tint */
+}
+
+.timeline-container {
+  position: relative;
+  width: 100%;
+  padding-left: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 10px;
+}
+
+/* Vertical Timeline Line */
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background-color: #B67B16;
+}
+
+.timeline-item {
+  position: relative;
+  width: 100%;
+}
+
+/* Timeline bullet points */
+.timeline-badge {
+  position: absolute;
+  left: -36px;
+  top: 4px;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  background-color: #2D4629;
+  border: 1.5px solid #B67B16;
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  z-index: 2;
+}
+
+.timeline-card {
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  border-left: 2.5px solid #B67B16;
+}
+
+.timeline-time {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #B67B16;
+  letter-spacing: 1.5px;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.timeline-event {
+  font-size: 17px;
+  font-weight: 700;
+  color: #2D4629;
+  margin-bottom: 6px;
+}
+
+.timeline-desc {
+  font-size: 13.5px;
+  color: #B67B16;
+  line-height: 1.5;
+}
+
+/* 5. When & Where (Details section) */
+.details-section {
+  padding: 60px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modern-details-card {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(182, 123, 22, 0.15);
+  width: 100%;
+}
+
+.details-header {
+  background-color: #2D4629;
+  padding: 20px;
+  text-align: center;
+}
+
+.details-header h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  color: #FFFFFF;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.details-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.details-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.info-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-text h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #2D4629;
+}
+
+.info-text p {
+  font-size: 13px;
+  color: #B67B16;
+  line-height: 1.5;
+}
+
+.details-footer {
+  padding: 0 24px 24px 24px;
+}
+
+.direction-btn {
+  display: block;
+  background-color: transparent;
+  border: 1px solid #B67B16;
+  color: #B67B16;
+  padding: 14px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.direction-btn:hover {
+  background-color: #B67B16;
+  color: #FFFFFF;
+}
+
+/* 6. Captured Moments (Gallery Grid) */
+.gallery-section {
+  padding: 40px 24px 60px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  background-color: #FFFFFF;
+  padding: 6px 6px 20px 6px; /* polaroid styling */
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+
+.gallery-item:hover {
+  transform: translateY(-5px) rotate(1deg);
+}
+
+/* Make grid items asymmetric like a collage */
+.item-vertical {
+  grid-row: span 2;
+  aspect-ratio: 0.7;
+}
+
+.item-horizontal {
+  aspect-ratio: 1.3;
+}
+
+.item-square {
+  aspect-ratio: 1;
+}
+
+.item-tall {
+  aspect-ratio: 0.85;
+}
+
+/* 7. Elegant Minimal Countdown */
+.countdown-section {
+  padding: 60px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-top: 1px solid rgba(182, 123, 22, 0.15);
+  border-bottom: 1px solid rgba(182, 123, 22, 0.15);
+}
+
+.countdown-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: #2D4629;
+  margin-bottom: 24px;
+  letter-spacing: 2px;
+}
+
+.countdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 64px;
+}
+
+.countdown-item .val {
+  font-family: 'Poppins', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #2D4629;
+  line-height: 1;
+}
+
+.countdown-item .lbl {
+  font-family: 'Poppins', sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  color: #B67B16;
+  letter-spacing: 1.5px;
+  margin-top: 8px;
+}
+
+.countdown-divider {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #B67B16;
+  margin-bottom: 18px; /* alignment offset for label space */
+}
+
+/* 8. Footer Section */
+.footer-section {
+  width: 100%;
+}
+
+.footer-img-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: block;
+}
+
+.footer-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.footer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 30px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to top, rgba(45, 70, 41, 0.2), rgba(45, 70, 41, 0.45));
+}
+
+.footer-card {
+  background-color: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.footer-card h2 {
+  font-family: 'Alex Brush', cursive;
+  font-size: 54px;
+  color: #2D4629;
+  line-height: 1;
+}
+
+.footer-divider-dots {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0 20px 0;
+}
+
+.footer-divider-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #B67B16;
+}
+
+.footer-card p {
+  font-size: 14px;
+  color: #B67B16;
+  line-height: 1.8;
+  margin-bottom: 28px;
+  padding: 0 10px;
+}
+
+.share-btn {
+  background-color: #2D4629;
+  border: none;
+  color: #FFFFFF;
+  font-family: 'Lora', serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 14px 28px;
+  border-radius: 30px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 5px 15px rgba(45, 70, 41, 0.3);
+  transition: all 0.2s ease;
+}
+
+.share-btn:hover {
+  background-color: #B67B16;
+  box-shadow: 0 5px 15px rgba(182, 123, 22, 0.3);
+}
+
+/* Lightbox Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.modal-img {
+  max-width: 90%;
+  max-height: 85%;
+  object-fit: contain;
+  border-radius: 12px;
+  cursor: default;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  color: #FFFFFF;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Scroll reveal trigger styles */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Scroll Reveal for Gallery items with scale-up */
+.gallery-item.scroll-reveal {
+  opacity: 0;
+  transform: scale(0.9) translateY(40px);
+  transition: opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-item.scroll-reveal.reveal-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.gallery-grid .gallery-item:nth-child(1) { transition-delay: 0.1s; }
+.gallery-grid .gallery-item:nth-child(2) { transition-delay: 0.25s; }
+.gallery-grid .gallery-item:nth-child(3) { transition-delay: 0.15s; }
+.gallery-grid .gallery-item:nth-child(4) { transition-delay: 0.3s; }

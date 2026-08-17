@@ -1,7 +1,6 @@
-/* Import premium Google Fonts to match the original typography */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,600&family=Kanit:wght@700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Marhey:wght@600;700&family=Poppins:wght@500;700&display=swap');
+/* Import Fonts (Alex Brush, Cormorant Garamond, Lora, Poppins) */
+@import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Poppins:wght@400;500;700&display=swap');
 
-/* Basic Resets & Theme Tokens */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -9,545 +8,268 @@
 }
 
 body {
-  background-color: #F7F3E9; /* Cream/Off-white background */
-  color: #2D4629; /* Forest green default text */
+  background-color: #121A10; /* Dark premium boundary */
   font-family: 'Lora', serif;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Constrain width to 520px for a beautiful mobile-first design, 
-   similar to how it looks on mobile phones, or center on desktop */
-.app-container {
+/* Constrained mobile choice portal framework */
+.split-portal {
+  position: relative;
   width: 100%;
   max-width: 520px;
+  height: 100vh;
   background-color: #F7F3E9;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
 }
 
-/* 1. Top Photo Date Strip */
-.photo-date-strip {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
-  width: 100%;
-}
-
-.photo-column {
+/* Individual choice panels */
+.portal-panel {
   position: relative;
+  height: 50vh;
   width: 100%;
-  aspect-ratio: 0.52; /* Mobile aspect ratio (taller columns) */
   overflow: hidden;
-  opacity: 0; /* Hide initially for smooth fade-in */
-}
-
-/* Staggered slide down and slide up animations */
-.photo-column:nth-child(1) {
-  animation: slideDownFade 6.5s cubic-bezier(0.1, 1, 0.1, 1) forwards;
-}
-
-.photo-column:nth-child(2) {
-  animation: slideUpFade 6.5s cubic-bezier(0.1, 1, 0.1, 1) forwards;
-  animation-delay: 0.4s;
-}
-
-.photo-column:nth-child(3) {
-  animation: slideDownFade 6.5s cubic-bezier(0.1, 1, 0.1, 1) forwards;
-  animation-delay: 0.8s;
-}
-
-@keyframes slideDownFade {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideUpFade {
-  from {
-    transform: translateY(50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.photo-column img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.date-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 12px;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-size: 42px;
-  font-weight: 700;
-  color: #FFFFFF;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
-  user-select: none;
-}
-
-/* 2. Invitation Header */
-.invitation-header {
-  text-align: center;
-  padding: 36px 20px 24px;
-}
-
-.gold-subtitle {
-  font-size: 15px;
-  font-weight: 500;
-  color: #B67B16; /* Muted gold */
-  line-height: 1.4;
-  text-align: center;
-}
-
-.couple-names {
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-}
-
-.couple-names .name {
-  font-family: 'Marhey', sans-serif;
-  font-size: 44px;
-  font-weight: 600;
-  color: #2D4629;
-}
-
-.couple-names .ampersand {
-  font-family: 'Marhey', sans-serif;
-  font-size: 36px;
-  color: #2D4629;
-  line-height: 1;
-}
-
-/* 3. Profiles Section */
-.profiles-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 20px 36px;
-}
-
-.gold-subtitle-caps {
-  font-size: 15px;
-  font-weight: 500;
-  color: #B67B16;
-  letter-spacing: 5px;
-  line-height: 1.4;
-  text-align: center;
-}
-
-/* For secondary headers like SAVE THE DATE which are smaller */
-.details-section .gold-subtitle-caps {
-  font-size: 10px;
-}
-
-.section-title {
-  font-family: 'Kanit', sans-serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: #2D4629;
-  margin-top: 4px;
-  margin-bottom: 24px;
-  text-align: center;
-}
-
-.details-section .section-title {
-  font-family: 'Lora', serif;
-  font-size: 25px;
-  margin-bottom: 16px;
-}
-
-.profile-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.image-wrapper {
-  width: 260px;
-  height: 260px;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.16);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.image-wrapper:hover {
-  transform: scale(1.02);
-}
-
-.image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  /* Start state: heavily blurred, bright, and semi-grayscale to resemble canvas paint */
-  filter: blur(20px) grayscale(70%) brightness(1.15);
-  transform: scale(1.08);
-  opacity: 0;
-  transition: filter 3s cubic-bezier(0.1, 0.8, 0.2, 1),
-              transform 3s cubic-bezier(0.1, 0.8, 0.2, 1),
-              opacity 3s cubic-bezier(0.1, 0.8, 0.2, 1);
-}
-
-/* Reveal state when scrolled into view */
-.image-wrapper.reveal img {
-  filter: blur(0px) grayscale(0%) brightness(1);
-  transform: scale(1);
-  opacity: 1;
-}
-
-.profile-name {
-  font-family: 'Marhey', sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  color: #2D4629;
-  letter-spacing: 1.5px;
-  margin-top: 18px;
-}
-
-.profile-role {
-  font-size: 25px;
-  font-weight: 500;
-  color: #B67B16;
-  margin-top: 6px;
-  margin-bottom: 4px;
-}
-
-.profile-parents {
-  font-size: 15px;
-  font-weight: 500;
-  color: #B67B16;
-  line-height: 1.4;
-  padding: 0 20px;
-}
-
-.ring-divider {
-  margin: 24px 0;
-  display: flex;
-  justify-content: center;
-}
-
-.ring-icon {
-  width: 80px;
-  height: auto;
-}
-
-/* 4. When & Where Details Card */
-.details-section {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.details-card {
-  background-color: #FFFFFF;
-  border-radius: 5px;
-  padding: 24px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 520px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.card-heading {
-  font-size: 20px;
-  font-weight: 700;
-  color: #2D4629;
-}
-
-.detail-line {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-}
-
-.detail-icon {
-  font-size: 20px;
-  line-height: 1;
-  margin-top: 2px;
-}
-
-.detail-content {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.detail-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #2D4629;
-}
-
-.detail-subtitle {
-  font-size: 13px;
-  color: #B67B16;
-  line-height: 1.5;
-}
-
-.button-container {
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 4px;
-}
-
-.map-button {
-  display: inline-block;
-  border: 1px solid #2D4629;
-  color: #2D4629;
-  background-color: #FFFFFF;
-  padding: 12px 24px;
   text-decoration: none;
-  font-family: 'Lora', serif;
-  font-size: 14px;
-  font-weight: 600;
-  border-radius: 5px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.map-button:hover {
-  background-color: #2D4629;
-  color: #FFFFFF;
-}
-
-/* 5. Countdown Section */
-.countdown-section {
-  padding: 20px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-
-.countdown-title {
-  font-size: 36px;
-  font-weight: 500;
-  color: #2D4629;
-  margin-bottom: 16px;
-}
-
-.countdown-row {
-  display: flex;
-  width: 100%;
-  gap: 8px;
-}
-
-.countdown-box {
-  flex: 1;
-  background-color: #2D4629;
-  border-radius: 6px;
-  padding: 14px 0;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: height 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.countdown-val {
-  font-family: 'Poppins', sans-serif;
-  font-size: 26px;
-  font-weight: 700;
-  color: #FFFFFF;
-  line-height: 1;
-}
-
-.countdown-label {
-  font-family: 'Poppins', sans-serif;
-  font-size: 10px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.85);
-  letter-spacing: 1.2px;
-  margin-top: 6px;
-}
-
-/* 6. Footer Section */
-.footer-section {
+.panel-bg-container {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  margin-top: 32px;
+  height: 100%;
+  z-index: 1;
 }
 
-.footer-image-container {
-  position: relative;
+.panel-bg {
   width: 100%;
-  overflow: hidden;
-  display: block;
-}
-
-.footer-bg {
-  width: 100%;
-  height: auto;
-  display: block;
+  height: 100%;
   object-fit: cover;
+  display: block;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.thank-you-overlay {
+.panel-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  padding: 24px 25px 25px 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  z-index: 2;
+  transition: background-color 0.5s ease;
 }
 
-.thank-you-card {
-  background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 8px;
-  width: 100%;
-  height: 100%;
+/* Theme color schemes for panels */
+.panel-wedding .panel-overlay {
+  background-color: rgba(45, 70, 41, 0.65); /* Rich Forest Green Overlay */
+}
+
+.panel-reception .panel-overlay {
+  background-color: rgba(182, 123, 22, 0.65); /* Muted Gold Overlay */
+}
+
+/* Hover and touch interactions */
+.portal-panel:hover .panel-bg {
+  transform: scale(1.08);
+}
+
+.portal-panel:hover .panel-overlay {
+  background-color: rgba(0, 0, 0, 0.45); /* Clearer view of photos on hover */
+}
+
+/* Panel content typography styling */
+.panel-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+}
+
+.panel-icon {
+  font-size: 32px;
+  margin-bottom: 8px;
+  display: block;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.panel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.panel-details {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.2);
+}
+
+.panel-btn {
+  display: inline-block;
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 8px 20px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.portal-panel:hover .panel-btn {
+  background-color: #FFFFFF;
+  color: #2D4629;
+  border-color: #FFFFFF;
+}
+
+.panel-reception:hover .panel-btn {
+  color: #B67B16;
+}
+
+/* Centered Overlapping Glass Badge */
+.center-badge-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  pointer-events: none; /* Allows hover clicks to pass through border regions */
+}
+
+.center-badge {
+  background-color: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid #B67B16;
+  border-radius: 50%;
+  width: 170px;
+  height: 170px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 24px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  pointer-events: auto; /* Restores touch focus */
+  padding: 16px;
+  animation: badgeScaleIn 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.thank-you-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: 44px;
-  font-weight: 600;
-  color: #2D4629;
-  line-height: 0.9;
-}
-
-.heart-divider {
-  margin: 22px 0 26px 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 13px;
-  width: 100%;
-}
-
-.heart-divider .line {
-  width: 49px;
-  height: 0.8px;
-  background-color: #2D4629;
-}
-
-.heart-divider .heart {
-  font-size: 14px;
-  color: #2D4629;
-  line-height: 1;
-}
-
-.thank-you-text {
-  font-size: 15px;
-  font-weight: 500;
-  color: #B67B16;
-  line-height: 1.9;
-  margin-bottom: 40px; /* Gives visual breathing space before sharing button */
-}
-
-.share-button {
-  background-color: transparent;
-  border: 0.8px solid #B67B16;
-  color: #B67B16;
-  font-family: 'Lora', serif;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 12px 23px;
-  border-radius: 50px; /* Stadium border */
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.share-button:hover {
-  background-color: #B67B16;
-  color: #FFFFFF;
-}
-
-.share-icon {
-  font-size: 16px;
-  line-height: 1;
-}
-
-/* Image Zoom Modal Styling */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9);
-  align-items: center;
-  justify-content: center;
-  cursor: zoom-out;
-}
-
-.modal-content {
-  max-width: 90%;
-  max-height: 85%;
-  object-fit: contain;
-  border-radius: 20px;
-  cursor: default;
-  transition: transform 0.2s ease;
-}
-
-.modal-close {
-  position: absolute;
-  top: 15px;
-  right: 25px;
-  color: #FFFFFF;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-}
-
-.modal-close:hover {
-  color: #CCCCCC;
-}
-
-/* Media Query to handle tablets/desktops. If we are on desktop,
-   we still keep the mobile frame, but let's make sure the layout looks
-   correctly centered. */
-@media (min-width: 521px) {
-  /* On larger screens, the aspect ratio of top columns matches the desktop aspect ratio (0.78) */
-  .photo-column {
-    aspect-ratio: 0.78;
+@keyframes badgeScaleIn {
+  0% {
+    transform: scale(0.4) rotate(-15deg);
+    opacity: 0;
   }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.badge-subtitle {
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: #B67B16;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.badge-names {
+  font-family: 'Alex Brush', cursive;
+  font-size: 26px;
+  color: #2D4629;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.badge-divider {
+  color: #B67B16;
+  font-size: 8px;
+  margin: 4px 0;
+}
+
+.badge-date {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #2D4629;
+}
+
+/* Staggered Load Transitions for Panel contents */
+.panel-wedding .panel-content {
+  animation: contentReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.panel-reception .panel-content {
+  animation: contentReveal 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+@keyframes contentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Expansion transition styles for Hero Animation */
+.split-portal.wedding-expanded .panel-wedding {
+  height: 100vh;
+}
+
+.split-portal.wedding-expanded .panel-reception {
+  height: 0vh;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.split-portal.wedding-expanded .center-badge-container {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.6);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.split-portal.wedding-expanded .panel-wedding .panel-content {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.split-portal.wedding-expanded .panel-wedding .panel-bg {
+  transform: scale(1.08);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
