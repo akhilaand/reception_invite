@@ -44,6 +44,44 @@ body {
   width: 100%;
   aspect-ratio: 0.52; /* Mobile aspect ratio (taller columns) */
   overflow: hidden;
+  opacity: 0; /* Hide initially for smooth fade-in */
+}
+
+/* Staggered slide down and slide up animations */
+.photo-column:nth-child(1) {
+  animation: slideDownFade 6.5s cubic-bezier(0.1, 1, 0.1, 1) forwards;
+}
+
+.photo-column:nth-child(2) {
+  animation: slideUpFade 6.5s cubic-bezier(0.1, 1, 0.1, 1) forwards;
+  animation-delay: 0.4s;
+}
+
+.photo-column:nth-child(3) {
+  animation: slideDownFade 6.5s cubic-bezier(0.1, 1, 0.1, 1) forwards;
+  animation-delay: 0.8s;
+}
+
+@keyframes slideDownFade {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpFade {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .photo-column img {
@@ -169,6 +207,20 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
+  /* Start state: heavily blurred, bright, and semi-grayscale to resemble canvas paint */
+  filter: blur(20px) grayscale(70%) brightness(1.15);
+  transform: scale(1.08);
+  opacity: 0;
+  transition: filter 3s cubic-bezier(0.1, 0.8, 0.2, 1),
+              transform 3s cubic-bezier(0.1, 0.8, 0.2, 1),
+              opacity 3s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+/* Reveal state when scrolled into view */
+.image-wrapper.reveal img {
+  filter: blur(0px) grayscale(0%) brightness(1);
+  transform: scale(1);
+  opacity: 1;
 }
 
 .profile-name {

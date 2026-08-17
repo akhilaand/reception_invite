@@ -72,3 +72,27 @@ document.addEventListener("keydown", (e) => {
     closeZoom();
   }
 });
+
+// Intersection Observer for scroll-reveal animations (painting effect)
+document.addEventListener("DOMContentLoaded", () => {
+  const profileWrappers = document.querySelectorAll(".profile-card .image-wrapper");
+  
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px 0px -120px 0px", // Trigger when element is 120px inside viewport
+    threshold: 0.05
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("reveal");
+        observer.unobserve(entry.target); // Reveal animation only triggers once
+      }
+    });
+  }, observerOptions);
+
+  profileWrappers.forEach(wrapper => {
+    observer.observe(wrapper);
+  });
+});
